@@ -1,10 +1,9 @@
 using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
-using JsonRewrite;
 using UnityEngine;
 
-namespace JsonRewrite_Base
+namespace JsonRewrite
 {
     // Yes, this is done partially out of spite.
     [BepInPlugin("tairasoul.vaproxy.spitejsonrewrite", "JsonRewrite", "1.0.0")]

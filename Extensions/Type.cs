@@ -1,8 +1,8 @@
 using System.Reflection;
-using System;
 
 namespace JsonRewrite.Extensions
 {
+
     internal static class TypeExtensions
     {
         internal static T GetF<T>(this Type obj, string field, object instance) {

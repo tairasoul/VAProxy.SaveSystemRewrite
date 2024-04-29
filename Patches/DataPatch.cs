@@ -4,9 +4,6 @@ using UnityEngine;
 using System.Linq;
 using System;
 using System.Collections;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
-using JsonRewrite_Base;
-using PixelCrushers.DialogueSystem;
 
 namespace JsonRewrite
 {
@@ -34,6 +31,7 @@ namespace JsonRewrite
                 __instance.Chip(6);
                 __instance.Chip(7);
                 __instance.Chip(8);
+                SaveData.Data.fresh = 1;
             }
             else {
                 Load(__instance);

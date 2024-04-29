@@ -412,8 +412,8 @@
     <Reference Include="System.Xml.Linq">
       <HintPath>../../../.local/share/Steam/steamapps/common/VA Proxy Demo/VA-Proxy_Data/Managed/System.Xml.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="SettingsAPI">
-      <HintPath>../../../Downloads/SettingsAPI/SettingsAPI.dll</HintPath>
+    <Reference Include="VAProxy.API">
+      <HintPath>../../../Downloads/VAP.BundleLoader.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
