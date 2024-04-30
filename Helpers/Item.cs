@@ -53,7 +53,8 @@ namespace JsonRewrite.Helpers
             return new WeaponObject
             {
                 weaponInternal = weapon,
-                InventoryObject = obj
+                InventoryObject = obj,
+                Equipped = false
             };
         }
 
@@ -63,7 +64,8 @@ namespace JsonRewrite.Helpers
             return new ChipObject
             {
                 chipInternal = chip,
-                InventoryObject = obj
+                InventoryObject = obj,
+                Equipped = false
             };
         }
 
@@ -73,7 +75,8 @@ namespace JsonRewrite.Helpers
             return new OutfitObject
             {
                 outfitInternal = outfit,
-                InventoryObject = obj
+                InventoryObject = obj,
+                Equipped = false
             };
         }
     }
@@ -88,17 +91,20 @@ namespace JsonRewrite.Helpers
     {
         public Weapon weaponInternal;
         public GameObject InventoryObject;
+        public bool Equipped;
     }
 
     public struct ChipObject
     {
         public Chip chipInternal;
         public GameObject InventoryObject;
+        public bool Equipped;
     }
 
     public struct OutfitObject
     {
         public Outfit outfitInternal;
         public GameObject InventoryObject;
+        public bool Equipped;
     }
 }

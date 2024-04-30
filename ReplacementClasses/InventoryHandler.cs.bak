@@ -1,0 +1,128 @@
+using FluffyUnderware.DevTools.Extensions;
+using HarmonyLib;
+using JsonRewrite.Extensions;
+using JsonRewrite.Helpers;
+using UnityEngine;
+
+namespace JsonRewrite.Replacements
+{
+    public class InventoryHandler : MonoBehaviour
+    {
+        public WeaponObject[] Weapons = new WeaponObject[0];
+        public ChipObject[] Chips = new ChipObject[0];
+        public ItemObject[] Items = new ItemObject[0];
+        public OutfitObject[] Outfits = new OutfitObject[0];
+
+        public int MaxWeaponsEquipped = 2;
+        public int MaxChipsEquipped = 8;
+        public int MaxQuickAccessEquipped = 2;
+        public int MaxOutfitsEquipped = 1;
+        public Action<ItemObject> ItemAdded;
+        public Action<ChipObject> ChipAdded;
+        public Action<WeaponObject> WeaponAdded;
+        public Action<OutfitObject> OutfitAdded;
+
+        GameObject CharacterPage;
+        GameObject InventoryPage;
+
+        void Start()
+        {
+            GameObject Pages = GameObject.Find("MAINMENU/Canvas/Pages");
+            CharacterPage = Pages.Find("Character");
+            InventoryPage = Pages.Find("Inventory");
+        }
+
+        public void AddItem(Item item)
+        {
+            ItemObject itm = InventoryItemFactory.CreateItem(item);
+            ItemAdded.Invoke(itm);
+            Items = Items.AddToArray(itm);
+        }
+
+        public void RemoveItem(Item item)
+        {
+            item.Amount = 0;
+            foreach (ItemObject itm in Items)
+            {
+                if (itm.itemInternal.Name == item.Name)
+                {
+                    itm.InventoryObject.Destroy();
+                    Items = Items.Remove(itm);
+                    break;
+                }
+            }
+        }
+
+        public void AddChip(Chip chip)
+        {
+            ChipObject itm = InventoryItemFactory.CreateChip(chip);
+            ChipAdded.Invoke(itm);
+            Chips = Chips.AddToArray(itm);
+        }
+
+        public void RemoveChip(Chip chip)
+        {
+            foreach (ChipObject obj in Chips)
+            {
+                if (obj.chipInternal.Name == chip.Name)
+                {
+                    ChipObject chip1 = obj;
+                    if (chip1.Equipped)
+                        chip1.chipInternal.ChipRemoved.Invoke(chip);
+                    chip1.Equipped = false;
+                    chip1.InventoryObject.Destroy();
+                    Chips = Chips.Remove(obj);
+                    break;
+                }
+            }
+        }
+
+        public void AddWeapon(Weapon weapon)
+        {
+            WeaponObject itm = InventoryItemFactory.CreateWeapon(weapon);
+            WeaponAdded.Invoke(itm);
+            Weapons = Weapons.AddToArray(itm);
+        }
+
+        public void RemoveWeapon(Weapon weapon)
+        {
+            foreach (WeaponObject obj in Weapons)
+            {
+                if (obj.weaponInternal.WeaponName == weapon.WeaponName)
+                {
+                    WeaponObject weapon1 = obj;
+                    if (weapon1.Equipped)
+                        weapon1.weaponInternal.WeaponUnequipped.Invoke(weapon);
+                    weapon1.Equipped = false;
+                    weapon1.InventoryObject.Destroy();
+                    Weapons = Weapons.Remove(obj);
+                    break;
+                }
+            }
+        }
+
+        public void AddOutfit(Outfit outfit)
+        {
+            OutfitObject itm = InventoryItemFactory.CreateOutfit(outfit);
+            OutfitAdded.Invoke(itm);
+            Outfits = Outfits.AddToArray(itm);
+        }
+
+        public void RemoveOutfit(Outfit outfit)
+        {
+            foreach (OutfitObject obj in Outfits)
+            {
+                if (obj.outfitInternal.OutfitName == outfit.OutfitName)
+                {
+                    OutfitObject outfit1 = obj;
+                    if (outfit1.Equipped)
+                        outfit1.outfitInternal.OutfitUnequipped.Invoke(outfit);
+                    outfit1.Equipped = false;
+                    outfit1.InventoryObject.Destroy();
+                    Outfits = Outfits.Remove(obj);
+                    break;
+                }
+            }
+        }
+    }
+}
