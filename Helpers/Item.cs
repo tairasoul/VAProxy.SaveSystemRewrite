@@ -1,5 +1,5 @@
 using JsonRewrite.Extensions;
-using JsonRewrite.Replacements;
+using JsonRewrite.Replacements.Inventory;
 using UnityEngine;
 using UnityEngine.UI;
 using VAP_API;
@@ -53,8 +53,7 @@ namespace JsonRewrite.Helpers
             return new WeaponObject
             {
                 weaponInternal = weapon,
-                InventoryObject = obj,
-                Equipped = false
+                InventoryObject = obj
             };
         }
 
@@ -64,8 +63,7 @@ namespace JsonRewrite.Helpers
             return new ChipObject
             {
                 chipInternal = chip,
-                InventoryObject = obj,
-                Equipped = false
+                InventoryObject = obj
             };
         }
 
@@ -75,8 +73,7 @@ namespace JsonRewrite.Helpers
             return new OutfitObject
             {
                 outfitInternal = outfit,
-                InventoryObject = obj,
-                Equipped = false
+                InventoryObject = obj
             };
         }
     }
@@ -91,20 +88,17 @@ namespace JsonRewrite.Helpers
     {
         public Weapon weaponInternal;
         public GameObject InventoryObject;
-        public bool Equipped;
     }
 
     public struct ChipObject
     {
         public Chip chipInternal;
         public GameObject InventoryObject;
-        public bool Equipped;
     }
 
     public struct OutfitObject
     {
         public Outfit outfitInternal;
         public GameObject InventoryObject;
-        public bool Equipped;
     }
 }
