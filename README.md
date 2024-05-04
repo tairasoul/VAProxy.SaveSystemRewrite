@@ -1,5 +1,5 @@
 # VAProxy.SaveSystemRewrite
 
-Yes, this is literally a save system rewrite using JSON mostly out of spite.
+This used to only be a save system rewrite, now going a lot further to rewriting just about all of the game's internals.
 
-No, I do not intend to maintain this.
+Probably very unstable.
